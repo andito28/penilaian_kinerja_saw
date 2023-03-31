@@ -26,7 +26,7 @@
                 @yield('content')
             </div>
         </div>
-
+        @stack('modal')
         @include('layouts.admin.footer')>
     </section>
 

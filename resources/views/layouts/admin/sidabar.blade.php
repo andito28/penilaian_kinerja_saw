@@ -7,7 +7,7 @@
     </div>
     <ul id="sidebar_menu">
         <li class="mm-active">
-            <a href="#">
+            <a href="{{ route('dashboard.index') }}">
                 <div class="icon_menu">
                     <img src="{{ asset('pages/img/menu-icon/dashboard.svg') }}" alt="">
                 </div>
@@ -15,7 +15,7 @@
             </a>
         </li>
         <li class="">
-            <a href="">
+            <a href="{{ route('laskar.index') }}">
                 <div class="icon_menu">
                     <img src="{{ asset('pages/img/menu-icon/4.svg') }}" alt="">
                 </div>
