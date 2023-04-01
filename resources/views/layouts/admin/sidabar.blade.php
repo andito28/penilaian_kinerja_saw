@@ -23,7 +23,7 @@
             </a>
         </li>
         <li class="">
-            <a href="Board.html" aria-expanded="false">
+            <a href="{{ route('kriteria.index') }}" aria-expanded="false">
                 <div class="icon_menu">
                     <img src="{{ asset('pages/') }}/img/menu-icon/5.svg" alt="">
                 </div>
