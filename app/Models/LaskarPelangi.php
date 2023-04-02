@@ -12,6 +12,6 @@ class LaskarPelangi extends Model
     protected $fillable = ['nama','kode','nik','jenis_pekerjaan','unit_kerja'];
 
     public function Nilai(){
-        return $this->belongsTo(Nilai::class);
+        return $this->hasMany(Nilai::class);
     }
 }

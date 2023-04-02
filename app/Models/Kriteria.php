@@ -12,7 +12,7 @@ class Kriteria extends Model
     protected $fillable = ['kode','nama_kriteria','jenis','bobot'];
 
     public function Nilai(){
-        return $this->belongsTo(Nilai::class);
+        return $this->hasMany(Nilai::class);
     }
 
 }

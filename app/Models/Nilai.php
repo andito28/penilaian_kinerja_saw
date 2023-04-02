@@ -12,10 +12,10 @@ class Nilai extends Model
     protected $fillable = ['laskar_pelangi_id','kriteria_id','nilai'];
 
     public function LaskarPelangi(){
-        return $this->hasOne(LaskarPelangi::class);
+        return $this->belongsTo(LaskarPelangi::class);
     }
 
     public function Kriteria(){
-        return $this->hasOne(Kriteria::class);
+        return $this->belongsTo(Kriteria::class);
     }
 }
