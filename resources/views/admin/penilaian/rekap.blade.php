@@ -1,23 +1,8 @@
 @extends('layouts.admin.master')
 
 @section('title')
-    Laskar Pelangi
+    Rekap Penilaian
 @endsection
-
-@push('add-style')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.css" />
-    <style>
-        table.dataTable thead th {
-            color: white;
-            font-weight: 600;
-        }
-
-        table.dataTable tbody td {
-            font-size: 14px;
-            color: black;
-        }
-    </style>
-@endpush
 
 @section('content')
     @include('sweetalert::alert')
@@ -25,9 +10,8 @@
         <div class="col-12">
             <div class="page_title_box d-flex align-items-center justify-content-between">
                 <div class="page_title_left">
-                    <h3 class="f_s_30 f_w_700 text_white">Data Laskar Pelangi</h3>
+                    <h3 class="f_s_30 f_w_700 text_white">Rekap Penilaian</h3>
                 </div>
-                <a href="{{ route('laskar.create') }}" class="white_btn3">Tambah Laskar</a>
             </div>
         </div>
     </div>
@@ -41,7 +25,6 @@
                                 <thead style="background-color: #20c997; ">
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode</th>
                                         <th scope="col">Nama</th>
                                         <th scope="col">Nik</th>
                                         <th scope="col">Jenis Pekerjaan</th>
@@ -50,10 +33,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $key => $value)
+                                    {{-- @foreach ($data as $key => $value)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->kode }}</td>
                                             <td>{{ $value->nama }}</td>
                                             <td>{{ $value->nik }}</td>
                                             <td>{{ $value->jenis_pekerjaan }}</td>
@@ -67,7 +49,7 @@
                                                         class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
@@ -77,48 +59,3 @@
         </div>
     </div>
 @endsection
-
-@push('modal')
-    <div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Hapus Data</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('laskar.delete') }}" method="post">
-                        @csrf
-                        @method('delete')
-                        <div>
-                            <input type=hidden id="id" name=id>
-                            <h5 id="exampleModalLabel">Apakah Anda yakin ingin menghapus data ini?</h5>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-                    <button type="submit" class="btn btn-danger">Hapus</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-@endpush
-
-@push('add-script')
-    <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable();
-        });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-    <script>
-        $('.delete-data').click(function() {
-            var id = $(this).data('id');
-            $('#id').val(id);
-        });
-    </script>
-@endpush

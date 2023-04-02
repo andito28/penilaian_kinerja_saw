@@ -39,20 +39,20 @@
             </a>
         </li>
         <li class="">
-            <a href="calender.html" aria-expanded="false">
+            <a href="{{ route('penilaian.hasil') }}" aria-expanded="false">
+                <div class="icon_menu">
+                    <img src="{{ asset('pages') }}/img/menu-icon/2.svg" alt="">
+                </div>
+                <span>Hasil Penilaian</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="{{ route('penilaian.rekap') }}" aria-expanded="false">
                 <div class="icon_menu">
                     <img src="{{ asset('pages') }}/img/menu-icon/7.svg" alt="">
                 </div>
                 <span>Rekap Penilaian</span>
             </a>
         </li>
-        {{-- <li class="">
-            <a href="calender.html" aria-expanded="false">
-                <div class="icon_menu">
-                    <img src="{{ asset('pages') }}/img/menu-icon/2.svg" alt="">
-                </div>
-                <span>Booking Villa</span>
-            </a>
-        </li> --}}
     </ul>
 </nav>

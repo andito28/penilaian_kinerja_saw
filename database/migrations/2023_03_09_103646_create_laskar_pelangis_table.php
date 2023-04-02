@@ -15,6 +15,7 @@ class CreateLaskarPelangisTable extends Migration
     {
         Schema::create('laskar_pelangis', function (Blueprint $table) {
             $table->id();
+            $table->string('kode');
             $table->string('nama');
             $table->string('nik');
             $table->string('jenis_pekerjaan');

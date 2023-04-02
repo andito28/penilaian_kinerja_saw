@@ -9,5 +9,10 @@ class Kriteria extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama_kriteria','jenis','bobot'];
+    protected $fillable = ['kode','nama_kriteria','jenis','bobot'];
+
+    public function Nilai(){
+        return $this->belongsTo(Nilai::class);
+    }
+
 }

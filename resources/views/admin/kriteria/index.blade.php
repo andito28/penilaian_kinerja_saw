@@ -5,15 +5,9 @@
 @endsection
 
 @push('add-style')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.css" />
     <style>
-        table.dataTable thead th {
+        table th {
             color: white;
-            font-weight: 600;
-        }
-
-        table.dataTable tbody td {
-            font-size: 14px;
         }
     </style>
 @endpush
@@ -36,10 +30,11 @@
                 <div class="white_card_body">
                     <div class="QA_table mb_30 mt-2">
                         <div class="table-responsive">
-                            <table class="table lms_table_active" id="myTable">
-                                <thead style="background-color: #20c997; ">
+                            <table class="table table-bordered" id="myTable">
+                                <thead style="background-color: #20c997;">
                                     <tr>
                                         <th>No</th>
+                                        <th>Kode</th>
                                         <th scope="col">Nama Kriteria</th>
                                         <th scope="col">Jenis</th>
                                         <th scope="col">Bobot</th>
@@ -49,10 +44,11 @@
                                 <tbody>
                                     @foreach ($data as $key => $value)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->nama_kriteria }}</td>
-                                            <td>{{ $value->jenis }}</td>
-                                            <td>{{ $value->bobot }}</td>
+                                            <td width="5%">{{ $key + 1 }}</td>
+                                            <td width="5%">{{ $value->kode }}</td>
+                                            <td width="50%">{{ $value->nama_kriteria }}</td>
+                                            <td width="13%">{{ $value->jenis }}</td>
+                                            <td width="12%">{{ $value->bobot }}</td>
                                             <td width="15%">
                                                 <a class="btn btn-success text-white"
                                                     href="{{ route('kriteria.edit', $value->id) }}"> <i
@@ -102,11 +98,6 @@
 @endpush
 
 @push('add-script')
-    <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable();
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>

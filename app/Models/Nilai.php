@@ -10,4 +10,12 @@ class Nilai extends Model
     use HasFactory;
 
     protected $fillable = ['laskar_pelangi_id','kriteria_id','nilai'];
+
+    public function LaskarPelangi(){
+        return $this->hasOne(LaskarPelangi::class);
+    }
+
+    public function Kriteria(){
+        return $this->hasOne(Kriteria::class);
+    }
 }

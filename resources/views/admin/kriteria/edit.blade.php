@@ -19,6 +19,11 @@
                                 @method('PUT')
                                 <div class="row mb-3">
                                     <div class="col-md-12 mb-3">
+                                        <label class="form-label" style="font-weight:600">Kode</label>
+                                        <input type="text" class="form-control @error('kode') is-invalid @enderror"
+                                            name="kode" value="{{ old('kode', $data->kode) }}">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
                                         <label class="form-label" style="font-weight:600">Nama Kriteria</label>
                                         <input type="text"
                                             class="form-control @error('nama_kriteria') is-invalid @enderror"

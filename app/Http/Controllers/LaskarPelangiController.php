@@ -19,6 +19,7 @@ class LaskarPelangiController extends Controller
 
     public function store(Request $request){
         $request->validate([
+            'kode' => 'unique:laskar_pelangis',
             'nama' => 'required',
             'nik' => 'required',
             'jenis_pekerjaan' => 'required',
@@ -26,6 +27,7 @@ class LaskarPelangiController extends Controller
         ]);
 
         $data = new LaskarPelangi();
+        $data->kode = $request->kode;
         $data->nama = $request->nama;
         $data->nik = $request->nik;
         $data->jenis_pekerjaan = $request->jenis_pekerjaan;
@@ -37,17 +39,19 @@ class LaskarPelangiController extends Controller
 
     public function edit($id){
         $data = LaskarPelangi::findOrFail($id);
-        return view('admin.laskar.edit',compact('Data'));
+        return view('admin.laskar.edit',compact('data'));
     }
 
     public function update(Request $request,$id){
         $request->validate([
+            'kode' => 'unique:laskar_pelangis,kode,'.$id,
             'nama' => 'required',
             'nik' => 'required',
             'jenis_pekerjaan' => 'required',
             'unit_kerja' => 'required'
         ]);
         $data = LaskarPelangi::findOrFail($id);
+        $data->kode = $request->kode;
         $data->nama = $request->nama;
         $data->nik = $request->nik;
         $data->jenis_pekerjaan = $request->jenis_pekerjaan;

@@ -19,12 +19,14 @@ class KriteriaController extends Controller
 
     public function store(Request $request){
         $request->validate([
+            'kode' => 'unique:kriterias',
             'nama_kriteria' => 'required',
             'jenis' => 'required',
             'bobot' => 'required'
         ]);
 
         $data = new Kriteria();
+        $data->kode = $request->kode;
         $data->nama_kriteria = $request->nama_kriteria;
         $data->jenis = $request->jenis;
         $data->bobot = $request->bobot;
@@ -40,12 +42,13 @@ class KriteriaController extends Controller
 
     public function update(Request $request,$id){
         $request->validate([
+            'kode' => 'unique:kriterias,kode,'.$id,
             'nama_kriteria' => 'required',
             'jenis' => 'required',
             'bobot' => 'required'
         ]);
-
         $data = Kriteria::findOrFail($id);
+        $data->kode = $request->kode;
         $data->nama_kriteria = $request->nama_kriteria;
         $data->jenis = $request->jenis;
         $data->bobot = $request->bobot;
