@@ -267,6 +267,9 @@
                                                 @php
                                                     $hasil_rank['nilai'] = $hasil_normalisasi;
                                                     $hasil_rank['nama'] = $value_l->nama;
+                                                    $hasil_rank['nik'] = $value_l->nik;
+                                                    $hasil_rank['jenis_pekerjaan'] = $value_l->jenis_pekerjaan;
+                                                    $hasil_rank['unit_kerja'] = $value_l->unit_kerja;
                                                     array_push($hasil_ranks, $hasil_rank);
                                                 @endphp
                                                 {{ $hasil_normalisasi }}
@@ -289,14 +292,17 @@
                     <div class="QA_table mb_30 mt-2">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="myTable">
-                                <thead style="background-color: #20c997; ">
+                                <thead style="background-color: #20c997;text-align:center ">
                                     <tr>
                                         <th>No</th>
                                         <th scope="col">Nama </th>
+                                        <th scope="col">Nik </th>
+                                        <th scope="col">Jenis Pekerjaan </th>
+                                        <th scope="col">Unit Kerja </th>
                                         <th scope="col">Nilai Akhir</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody style="text-align:center">
                                     @php
                                         $no = 1;
                                         rsort($hasil_ranks);
@@ -305,6 +311,9 @@
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $value['nama'] }}</td>
+                                            <td>{{ $value['nik'] }}</td>
+                                            <td>{{ $value['jenis_pekerjaan'] }}</td>
+                                            <td>{{ $value['unit_kerja'] }}</td>
                                             <td>{{ $value['nilai'] }}</td>
                                         </tr>
                                     @endforeach

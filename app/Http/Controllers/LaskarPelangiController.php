@@ -9,7 +9,7 @@ use App\Models\LaskarPelangi;
 class LaskarPelangiController extends Controller
 {
     public function index(){
-        $data = LaskarPelangi::all();
+        $data = LaskarPelangi::orderBy('kode','asc')->get();
         return view('admin.laskar.index',compact('data'));
     }
 
