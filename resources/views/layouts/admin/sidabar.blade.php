@@ -31,7 +31,7 @@
             </a>
         </li>
         <li class="">
-            <a href="invoice.html" aria-expanded="false">
+            <a href="{{ route('penilaian.index') }}" aria-expanded="false">
                 <div class="icon_menu">
                     <img src="{{ asset('pages') }}/img/menu-icon/6.svg" alt="">
                 </div>

@@ -27,7 +27,7 @@
                 <div class="col-lg-6">
                     <div class="modal-content cs_modal">
                         <div class="modal-header justify-content-center theme_bg_1">
-                            <h5 class="modal-title text_white">SPK PENILAIAN KINERJA LASKAR PELANGI</h5>
+                            <h5 class="modal-title text_white text-center">SPK PENILAIAN KINERJA LASKAR PELANGI</h5>
                         </div>
                         <div class="modal-body">
                             <div class="text-center">

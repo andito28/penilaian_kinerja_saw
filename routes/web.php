@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth','checkRole:admin']],function(){
     Route::delete('/kriteria/delete', [KriteriaController::class, 'destroy'])->name('kriteria.delete');
 
     //penilaian
+    Route::get('/penilaian', [PenilaianController::class, 'index'])->name('penilaian.index');
+    Route::post('/penilaian-store', [PenilaianController::class, 'store'])->name('penilaian.store');
     Route::get('/penilaian-rekap', [PenilaianController::class, 'rekap'])->name('penilaian.rekap');
     Route::get('/penilaian-hasil', [PenilaianController::class, 'hasil'])->name('penilaian.hasil');
 });
