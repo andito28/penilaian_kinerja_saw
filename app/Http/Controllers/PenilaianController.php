@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\Nilai;
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
 use App\Models\LaskarPelangi;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class PenilaianController extends Controller
 {
@@ -23,6 +25,10 @@ class PenilaianController extends Controller
     }
 
     public function store(Request $request ){
+        $request->validate([
+            'laskar_id' => 'required',
+            'nilai.*' => 'required|max:100'
+        ]);
         $count = count($request->nilai);
         $data = Nilai::where('laskar_pelangi_id',$request->laskar_id)->first();
         if($data){
@@ -31,8 +37,17 @@ class PenilaianController extends Controller
                 ->where(['kriteria_id' => $request->kriteria[$i]])
                 ->update(['nilai' => $request->nilai[$i]]);
             }
+        }else{
+            for($i=0;  $i < $count; $i++){
+                Nilai::create([
+                    'laskar_pelangi_id' => $request->laskar_id,
+                    'kriteria_id' => $request->kriteria[$i],
+                    'nilai' => $request->nilai[$i]
+                ]);
+            }
         }
-        return redirect()->back();
+        // Alert::success('Berhasil', 'Berhasil Menambah Penilaian');
+        // return redirect()->route();
     }
 
 

@@ -182,7 +182,7 @@
                                                         @php
                                                             $nilai_max = App\Models\Nilai::where('kriteria_id', $value_n->kriteria_id)->max('nilai');
                                                         @endphp
-                                                        <td>{{ $hasil = $value_n->nilai / $nilai_max }}
+                                                        <td>{{ number_format($hasil = $value_n->nilai / $nilai_max, 3) }}
                                                         </td>
                                                         @php
                                                             $hasil_kali = $hasil * $item->bobot;
@@ -214,7 +214,7 @@
                                         <th rowspan="2" style="vertical-align : middle;text-align:center;">Alternatif
                                         </th>
                                         <th colspan="{{ $kriteria->count() }}" style="text-align:center;">Kriteria</th>
-                                        <th rowspan="2" style="vertical-align : middle;text-align:center">Hasil</th>
+                                        {{-- <th rowspan="2" style="vertical-align : middle;text-align:center">Hasil</th> --}}
                                     </tr>
                                     <tr>
                                         @foreach ($kriteria as $value)
@@ -258,22 +258,22 @@
                                                             $hasil_kali = $hasil * $item->bobot;
                                                             $hasil_normalisasi = $hasil_normalisasi + $hasil_kali;
                                                         @endphp
-                                                        <td>{{ $hasil_kali }}
+                                                        <td>{{ number_format($hasil_kali, 3) }}
                                                         </td>
                                                     @endif
                                                 @endforeach
                                             @endforeach
-                                            <td>
-                                                @php
-                                                    $hasil_rank['nilai'] = $hasil_normalisasi;
-                                                    $hasil_rank['nama'] = $value_l->nama;
-                                                    $hasil_rank['nik'] = $value_l->nik;
-                                                    $hasil_rank['jenis_pekerjaan'] = $value_l->jenis_pekerjaan;
-                                                    $hasil_rank['unit_kerja'] = $value_l->unit_kerja;
-                                                    array_push($hasil_ranks, $hasil_rank);
-                                                @endphp
-                                                {{ $hasil_normalisasi }}
-                                            </td>
+                                            @php
+                                                $hasil_rank['nilai'] = $hasil_normalisasi;
+                                                $hasil_rank['nama'] = $value_l->nama;
+                                                $hasil_rank['nik'] = $value_l->nik;
+                                                $hasil_rank['jenis_pekerjaan'] = $value_l->jenis_pekerjaan;
+                                                $hasil_rank['unit_kerja'] = $value_l->unit_kerja;
+                                                array_push($hasil_ranks, $hasil_rank);
+                                            @endphp
+                                            {{-- <td>
+                                                {{ number_format($hasil_normalisasi, 3) }}
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -314,7 +314,7 @@
                                             <td>{{ $value['nik'] }}</td>
                                             <td>{{ $value['jenis_pekerjaan'] }}</td>
                                             <td>{{ $value['unit_kerja'] }}</td>
-                                            <td>{{ $value['nilai'] }}</td>
+                                            <td>{{ number_format($value['nilai'], 5) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

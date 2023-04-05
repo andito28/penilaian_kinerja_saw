@@ -63,15 +63,17 @@
                                 </tr>
                             </table>
                         </div>
+                        @include('sweetalert::alert')
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <form action="{{ route('penilaian.store') }}" method="POST">
+                                <form action="{{ route('penilaian.store') }}" method="POST" id="form-nilai">
                                     @csrf
                                     <table width="100%" class="table table-bordered">
                                         <tr>
                                             <td colspan="2"><b>Nama :</b></td>
                                             <td>
-                                                <select name="laskar_id" class="js-example-basic-single" style="width:100%">
+                                                <select name="laskar_id" class="js-example-basic-single" style="width:100%"
+                                                    id="laskar_id">
                                                     <option value="">PILIH . . . . .</option>
                                                     @foreach ($laskar as $value)
                                                         <option value="{{ $value->id }}">{{ $value->nama }}</option>
@@ -88,7 +90,7 @@
                                                 </td>
                                                 <td>
                                                     <input type="number" class="form-control" name="nilai[]"
-                                                        placeholder="0 - 100">
+                                                        placeholder="0 - 100" value="">
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -110,6 +112,54 @@
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        var SITEURL = "{{ URL('/') }}";
+        $(function() {
+            $(document).ready(function() {
+                $('form').ajaxForm({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function() {
+                        var form = $('form');
+                        form.find('small').remove();
+                        form.find('.form-group').removeClass('is-invalid');
+                        form.find('.form-control').removeClass('is-invalid');
+                    },
+                    success: function(xhr) {
+                        $('#form-nilai').trigger("reset");
+                        $('#laskar_id').val('').trigger('change');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sukses',
+                            text: 'Berhasil Menambah Penilaian!',
+                        })
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: 'Lengkapi Form Terlebih Dahulu!',
+                        })
+                        var res = $.parseJSON(xhr.responseText);
+                        if ($.isEmptyObject(res) == false) {
+                            $.each(res.errors, function(key, value) {
+                                $('#' + key).closest('.form-group').addClass(
+                                    'is-invalid mb-1').append(
+                                    '<small class="is-invalid text-danger">' +
+                                    '<strong class="mb-0">' + value + '</strong>' +
+                                    '</small>');
+                                $('#' + key).closest('.form-control').addClass(
+                                    'is-invalid');
+                            })
+                        }
+                    }
+                });
+            });
         });
     </script>
 @endpush
