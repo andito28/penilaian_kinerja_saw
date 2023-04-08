@@ -64,7 +64,7 @@
                             </table>
                         </div>
                         @include('sweetalert::alert')
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="table-responsive">
                                 <form action="{{ route('penilaian.store') }}" method="POST" id="form-nilai">
                                     @csrf
@@ -98,6 +98,13 @@
                                     <button class="btn btn-primary">Submit Penilaian</button>
                                 </form>
                             </div>
+                        </div>
+                        <div class="col-md-4">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Daftar Laskar pelangi yang belum di nilai</th>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>

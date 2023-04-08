@@ -20,10 +20,10 @@
             <div class="white_card mb_20">
                 <div class="white_card_body">
                     <div class="row pt-5">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <img src="" alt="image">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <h2>Penilaian Kinerja Laskar pelangi</h2>
                         </div>
                     </div>

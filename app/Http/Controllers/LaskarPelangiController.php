@@ -32,6 +32,7 @@ class LaskarPelangiController extends Controller
         $data->nik = $request->nik;
         $data->jenis_pekerjaan = $request->jenis_pekerjaan;
         $data->unit_kerja = $request->unit_kerja;
+        $data->penilaian = "false";
         $data->save();
         Alert::success('Berhasil', 'Berhasil Menambah Data');
         return redirect()->route('laskar.index');

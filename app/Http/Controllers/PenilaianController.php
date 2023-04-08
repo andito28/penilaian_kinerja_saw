@@ -29,6 +29,9 @@ class PenilaianController extends Controller
             'laskar_id' => 'required',
             'nilai.*' => 'required|max:100'
         ]);
+        $laskar = LaskarPelangi::findOrFail($request->laskar_id);
+        $laskar->penilaian = "true";
+        $laskar-save();
         $count = count($request->nilai);
         $data = Nilai::where('laskar_pelangi_id',$request->laskar_id)->first();
         if($data){
