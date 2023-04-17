@@ -20,7 +20,7 @@
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label" style="font-weight:600">Kode</label>
                                         <input type="text" class="form-control @error('kode') is-invalid @enderror"
-                                            name="kode" value="{{ old('kode') }}">
+                                            name="kode" value="{{ $kode }}" readonly>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label" style="font-weight:600">Nama Lengkap</label>

@@ -14,7 +14,12 @@ class LaskarPelangiController extends Controller
     }
 
     public function create(){
-        return view('admin.laskar.create');
+        $data = LaskarPelangi::max('kode');
+        $order = (int) substr($data, 3, 3);
+        $order++;
+        $name = "LSK";
+        $kode = $name . sprintf("%03s", $order);
+        return view('admin.laskar.create',compact('kode'));
     }
 
     public function store(Request $request){

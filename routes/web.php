@@ -38,5 +38,6 @@ Route::group(['middleware' => ['auth','checkRole:admin']],function(){
     Route::post('/penilaian-store', [PenilaianController::class, 'store'])->name('penilaian.store');
     Route::get('/penilaian-rekap', [PenilaianController::class, 'rekap'])->name('penilaian.rekap');
     Route::get('/penilaian-hasil', [PenilaianController::class, 'hasil'])->name('penilaian.hasil');
+    Route::get('/print', [PenilaianController::class, 'print'])->name('print');
 });
 

@@ -10,6 +10,7 @@
             height: 40px;
         }
     </style>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 @endpush
 
 @section('content')
@@ -27,42 +28,6 @@
             <div class="white_card mb_20">
                 <div class="white_card_body">
                     <div class="row pt-2">
-                        <div class="col-md-4 mb-2">
-                            <table border="2" class="table table-bordered">
-                                <tr>
-                                    <td><b>Kategori Penilaian</b></td>
-                                    <td><b>Nilai Rata - rata</b></td>
-                                </tr>
-                                <tr>
-                                    <td><b>Baik</b></td>
-                                    <td><b>81 - 100</b></b></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <table border="2" class="table table-bordered">
-                                <tr>
-                                    <td><b>Kategori Penilaian</b></td>
-                                    <td><b>Nilai Rata - rata</b></td>
-                                </tr>
-                                <tr>
-                                    <td><b>Sedang</b></td>
-                                    <td><b>71 - 80</b></b></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <table border="2" class="table table-bordered">
-                                <tr>
-                                    <td><b>Kategori Penilaian</b></td>
-                                    <td><b>Nilai Rata - rata</b></td>
-                                </tr>
-                                <tr>
-                                    <td><b>Buruk</b></td>
-                                    <td><b>0 - 70</b></b></td>
-                                </tr>
-                            </table>
-                        </div>
                         @include('sweetalert::alert')
                         <div class="col-md-8">
                             <div class="table-responsive">
@@ -100,10 +65,46 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <table class="table table-bordered">
+                            <table border="2" class="table table-bordered">
                                 <tr>
-                                    <th>Daftar Laskar pelangi yang belum di nilai</th>
+                                    <td><b>Kategori Penilaian</b></td>
+                                    <td><b>Nilai Rata - rata</b></td>
                                 </tr>
+                                <tr>
+                                    <td><b>Baik</b></td>
+                                    <td><b>81 - 100</b></b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Sedang</b></td>
+                                    <td><b>71 - 80</b></b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Buruk</b></td>
+                                    <td><b>0 - 70</b></b></td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered" border="2">
+                                <tr>
+                                    <th>Daftar yang belum di nilai</th>
+                                    <th style="text-align: center">
+                                        <a href="">
+                                            <i class="fa fa-refresh fa-lg"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+                                @forelse ($laskar_nilai as $key => $value)
+                                    <tr>
+                                        <td colspan="2"> <i class='fa fa-dot-circle-o'></i> {{ $value->nama }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="2" style="text-align:center">
+                                            <span class="text-success">
+                                                <strong>Semua Sudah Dinilai</strong>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </table>
                         </div>
                     </div>

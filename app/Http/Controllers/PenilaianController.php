@@ -9,14 +9,16 @@ use Illuminate\Http\Request;
 use App\Models\LaskarPelangi;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use PDF;
 
 class PenilaianController extends Controller
 {
 
     public function index(){
         $laskar = LaskarPelangi::orderBy('nama','asc')->get();
+        $laskar_nilai = LaskarPelangi::where('penilaian','false')->orderBy('nama','asc')->get();
         $kriteria = Kriteria::all();
-        return view('admin.penilaian.index',compact('laskar','kriteria'));
+        return view('admin.penilaian.index',compact('laskar','kriteria','laskar_nilai'));
     }
     public function hasil(){
         $laskar = LaskarPelangi::orderBy('kode','asc')->get();
@@ -31,7 +33,7 @@ class PenilaianController extends Controller
         ]);
         $laskar = LaskarPelangi::findOrFail($request->laskar_id);
         $laskar->penilaian = "true";
-        $laskar-save();
+        $laskar->save();
         $count = count($request->nilai);
         $data = Nilai::where('laskar_pelangi_id',$request->laskar_id)->first();
         if($data){
@@ -53,5 +55,17 @@ class PenilaianController extends Controller
         // return redirect()->route();
     }
 
+    public function rekap(){
+        $laskar = LaskarPelangi::orderBy('kode','asc')->get();
+        $kriteria = Kriteria::all();
+        return view('admin.penilaian.rekap',compact('laskar','kriteria'));
+    }
+
+    public function print(){
+        $laskar = LaskarPelangi::orderBy('kode','asc')->get();
+        $kriteria = Kriteria::all();
+        $pdf = PDF::loadview('admin.penilaian.print',compact('laskar','kriteria'));
+        return $pdf->stream();
+    }
 
 }
