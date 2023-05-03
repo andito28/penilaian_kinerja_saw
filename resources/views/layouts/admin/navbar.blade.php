@@ -10,7 +10,7 @@
                         <img src="{{ asset('pages') }}/img/client_img.png" alt="#">
                         <div class="profile_info_iner">
                             <div class="profile_author_name">
-                                <p>Neurologist </p>
+                                <p>{{ Auth::user()->name }} </p>
                             </div>
                             <div class="profile_info_details">
                                 <form action="{{ route('logout') }}" method="POST">

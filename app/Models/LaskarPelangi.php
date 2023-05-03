@@ -9,7 +9,7 @@ class LaskarPelangi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama','kode','nik','jenis_pekerjaan','unit_kerja','penilaian'];
+    protected $fillable = ['nama','user_id','kode','nik','jenis_pekerjaan','unit_kerja','penilaian'];
 
     public function Nilai(){
         return $this->hasMany(Nilai::class);

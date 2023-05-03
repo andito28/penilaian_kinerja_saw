@@ -36,9 +36,10 @@
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="">
-                                    <input id="email" type="email"
+                                    <input id="email" type="text"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" autocomplete="email" autofocus placeholder="Email">
+                                        value="{{ old('email') }}" autocomplete="email" autofocus
+                                        placeholder="Email atau NIK">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

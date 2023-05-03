@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Alert;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\LaskarPelangi;
 
@@ -26,12 +27,20 @@ class LaskarPelangiController extends Controller
         $request->validate([
             'kode' => 'unique:laskar_pelangis',
             'nama' => 'required',
-            'nik' => 'required',
+            'nik' => 'required:unique:laskar_pelangis',
             'jenis_pekerjaan' => 'required',
             'unit_kerja' => 'required'
         ]);
 
+        $user = new User();
+        $user->name = $request->nama;
+        $user->email = $request->nik;
+        $user->password = bcrypt('12345678');
+        $user->role = 'laskar';
+        $user->save();
+
         $data = new LaskarPelangi();
+        $data->user_id = $user->id;
         $data->kode = $request->kode;
         $data->nama = $request->nama;
         $data->nik = $request->nik;
@@ -52,7 +61,7 @@ class LaskarPelangiController extends Controller
         $request->validate([
             'kode' => 'unique:laskar_pelangis,kode,'.$id,
             'nama' => 'required',
-            'nik' => 'required',
+            'nik' =>  'required,unique:laskar_pelangis,kode,'.$id,
             'jenis_pekerjaan' => 'required',
             'unit_kerja' => 'required'
         ]);

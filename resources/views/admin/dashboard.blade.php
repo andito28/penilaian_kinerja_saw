@@ -2,6 +2,19 @@
 
 @section('title', 'Dashboard')
 
+@push('add-style')
+    <style>
+        h2 {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .body {
+            padding-top: 90px;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -19,12 +32,22 @@
         <div class="col-lg-12 card_height_100">
             <div class="white_card mb_20">
                 <div class="white_card_body">
-                    <div class="row pt-5">
-                        <div class="col-md-5">
-                            <img src="" alt="image">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="{{ asset('pages/img/dashboard.jpg') }}" alt="image" style="width:100%">
                         </div>
-                        <div class="col-md-7">
-                            <h2>Penilaian Kinerja Laskar pelangi</h2>
+                        <div class="col-md-6">
+                            <div class="body text-center">
+                                <h2>
+                                    Penerapan Metode SAW Untuk
+                                </h2>
+                                <h2>
+                                    Penilaian Kinerja Laskar Pelangi
+                                </h2>
+                                <h2>
+                                    Dinas PPKB Kota Makassar
+                                </h2>
+                            </div>
                         </div>
                     </div>
                 </div>

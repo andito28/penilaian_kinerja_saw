@@ -35,9 +35,9 @@
                                     @csrf
                                     <table width="100%" class="table table-bordered">
                                         <tr>
-                                            <td colspan="2"><b>Nama :</b></td>
-                                            <td>
-                                                <select name="laskar_id" class="js-example-basic-single" style="width:100%"
+                                            <td colspan="3">
+                                                <b>NAMA LASKAR PELANGI : </b>
+                                                <select name="laskar_id" class="js-example-basic-single" style="width:70%"
                                                     id="laskar_id">
                                                     <option value="">PILIH . . . . .</option>
                                                     @foreach ($laskar as $value)
@@ -128,7 +128,7 @@
         var SITEURL = "{{ URL('/') }}";
         $(function() {
             $(document).ready(function() {
-                $('form').ajaxForm({
+                $('#form-nilai').ajaxForm({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },

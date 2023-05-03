@@ -15,11 +15,13 @@ class CreateLaskarPelangisTable extends Migration
     {
         Schema::create('laskar_pelangis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('kode');
             $table->string('nama');
             $table->string('nik');
             $table->string('jenis_pekerjaan');
             $table->string('unit_kerja');
+            $table->string('penilaian');
             $table->timestamps();
         });
     }
