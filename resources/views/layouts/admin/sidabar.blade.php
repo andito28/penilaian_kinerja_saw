@@ -53,13 +53,15 @@
                 <span>Hasil Penilaian</span>
             </a>
         </li>
-        <li class="">
-            <a href="{{ route('penilaian.rekap') }}" aria-expanded="false">
-                <div class="icon_menu">
-                    <img src="{{ asset('pages') }}/img/menu-icon/7.svg" alt="">
-                </div>
-                <span>Rekap Penilaian</span>
-            </a>
-        </li>
+        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'kepala_bidang')
+            <li class="">
+                <a href="{{ route('penilaian.rekap') }}" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{{ asset('pages') }}/img/menu-icon/7.svg" alt="">
+                    </div>
+                    <span>Rekap Penilaian</span>
+                </a>
+            </li>
+        @endif
     </ul>
 </nav>
