@@ -116,7 +116,7 @@
                                 <tbody style="text-align:center">
                                     @foreach ($laskar as $value)
                                         <tr>
-                                            <td>{{ $value->kode }}</td>
+                                            <td>{{ $value->nama }}</td>
                                             @php
                                                 $nilai = App\Models\Nilai::where('laskar_pelangi_id', $value->id)->get();
                                             @endphp
@@ -159,7 +159,7 @@
                                             $hasil_normalisasi = 0;
                                         @endphp
                                         <tr>
-                                            <td>{{ $value_l->kode }}</td>
+                                            <td>{{ $value_l->nama }}</td>
                                             @php
                                                 $nilai = App\Models\Nilai::where('laskar_pelangi_id', $value_l->id)->get();
                                             @endphp
@@ -231,7 +231,7 @@
                                             $hasil_normalisasi = 0;
                                         @endphp
                                         <tr>
-                                            <td>{{ $value_l->kode }}</td>
+                                            <td>{{ $value_l->nama }}</td>
                                             @php
                                                 $nilai = App\Models\Nilai::where('laskar_pelangi_id', $value_l->id)->get();
                                             @endphp
