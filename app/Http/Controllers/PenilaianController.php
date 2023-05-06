@@ -64,7 +64,7 @@ class PenilaianController extends Controller
     public function print(){
         $laskar = LaskarPelangi::orderBy('kode','asc')->get();
         $kriteria = Kriteria::all();
-        $pdf = PDF::loadview('admin.penilaian.print',compact('laskar','kriteria'));
+        $pdf = PDF::loadview('admin.penilaian.print',compact('laskar','kriteria'))->setPaper('a4','landscape');
         return $pdf->stream();
     }
 

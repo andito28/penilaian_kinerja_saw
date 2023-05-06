@@ -14,6 +14,14 @@
         h3 {
             line-height: 0px;
         }
+
+        th {
+            font-size: 15px;
+        }
+
+        td {
+            font-size: 15px;
+        }
     </style>
 </head>
 
@@ -68,6 +76,7 @@
                     @php
                         $hasil_rank['nilai'] = $hasil_normalisasi;
                         $hasil_rank['nama'] = $value_l->nama;
+                        $hasil_rank['id'] = $value_l->id;
                         $hasil_rank['nik'] = $value_l->nik;
                         $hasil_rank['jenis_pekerjaan'] = $value_l->jenis_pekerjaan;
                         $hasil_rank['unit_kerja'] = $value_l->unit_kerja;
@@ -88,7 +97,11 @@
                 <th scope="col">Nik </th>
                 <th scope="col">Jenis Pekerjaan </th>
                 <th scope="col">Unit Kerja </th>
+                @foreach ($kriteria as $value)
+                    <th style="text-align:center">{{ $value->kode }}</th>
+                @endforeach
                 <th scope="col">Nilai Akhir</th>
+                <th scope="col">Nilai Rata - rata</th>
             </tr>
         </thead>
         <tbody style="text-align:center">
@@ -103,10 +116,37 @@
                     <td>{{ $value['nik'] }}</td>
                     <td>{{ $value['jenis_pekerjaan'] }}</td>
                     <td>{{ $value['unit_kerja'] }}</td>
+                    @php
+                        $nilais = App\Models\Nilai::where('laskar_pelangi_id', $value['id'])->get();
+                        $sum = App\Models\Nilai::where('laskar_pelangi_id', $value['id'])->sum('nilai');
+                        $count = count($nilais);
+                        $average = $sum == 0 ? 0 : $sum / $count;
+                    @endphp
+                    {{-- @foreach ($nilais as $item)
+                        <td>{{ $item->nilai }}</td>
+                    @endforeach --}}
+                    @foreach ($kriteria as $key => $val)
+                        @php
+                            $nilai = empty($nilais[$key]) ? 0 : $nilais[$key]['nilai'];
+                        @endphp
+                        <td>{{ $nilai }}</td>
+                    @endforeach
                     <td>{{ number_format($value['nilai'], 5) }}</td>
+                    <td>{{ number_format($average, 2) }}</td>
                 </tr>
             @endforeach
         </tbody>
+    </table>
+    <br>
+    <strong>Keterangan :</strong>
+    <table>
+        @foreach ($kriteria as $key => $val)
+            <tr>
+                <td><strong>{{ $val->kode }} :</strong></td>
+                <td>{{ $val->nama_kriteria }}</td>
+                <td>({{ $val->bobot }})</td>
+            </tr>
+        @endforeach
     </table>
 </body>
 
