@@ -9,6 +9,11 @@
             padding-top: 5px;
             height: 40px;
         }
+
+        .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+            background-color: whitesmoke;
+            color: black;
+        }
     </style>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 @endpush
@@ -39,9 +44,12 @@
                                                 <b>NAMA LASKAR PELANGI : </b>
                                                 <select name="laskar_id" class="js-example-basic-single" style="width:70%"
                                                     id="laskar_id">
-                                                    <option value="">PILIH . . . . .</option>
+                                                    <option value="0">PILIH . . . . .</option>
                                                     @foreach ($laskar as $value)
-                                                        <option value="{{ $value->id }}">{{ $value->nama }}</option>
+                                                        <option data-id="{{ $value->penilaian }}"
+                                                            value="{{ $value->id }}">
+                                                            {{ $value->nama }} <i
+                                                                class="fa fa-check-circle custom-icon"></i></option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -54,7 +62,7 @@
                                                     {{ $value->nama_kriteria }}
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control" name="nilai[]"
+                                                    <input type="number" class="form-control data-input" name="nilai[]"
                                                         placeholder="0 - 100" value="">
                                                 </td>
                                             </tr>
@@ -125,6 +133,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript">
+        var waktuTimeout = 2000;
+        // Fungsi untuk me-reload halaman
+        function reloadHalaman() {
+            location.reload();
+        }
         var SITEURL = "{{ URL('/') }}";
         $(function() {
             $(document).ready(function() {
@@ -146,6 +159,7 @@
                             title: 'Sukses',
                             text: 'Berhasil Menambah Penilaian!',
                         })
+                        setTimeout(reloadHalaman, waktuTimeout);
                     },
                     error: function(xhr) {
                         Swal.fire({
@@ -167,6 +181,42 @@
                         }
                     }
                 });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2({
+                templateResult: function(option) {
+                    var color;
+                    if (option.element && option.element.dataset.id === 'true') {
+                        color = '#00a000'; // Warna latar belakang untuk nilai 1
+                    } else if (option.element && option.element.dataset.id === 'false') {
+                        color = '#ff0000'; // Warna latar belakang untuk nilai 2
+                    }
+                    return $('<span style="color:' + color + ';font-weight:500">' + option.text +
+                        '</span>');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#laskar_id').on('change', function() {
+                var id = $(this).val();
+                if (id) {
+                    $.ajax({
+                        url: '{{ route('nilai', ':id') }}'.replace(':id', id),
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('.data-input').each(function(index) {
+                                var value = data[index] || '';
+                                $(this).val(value);
+                            });
+                        }
+                    });
+                }
             });
         });
     </script>

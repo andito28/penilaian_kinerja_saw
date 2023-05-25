@@ -138,6 +138,19 @@
         </tbody>
     </table>
     <br>
+    <strong>Catatan :</strong>
+    <table>
+        <tr>
+            <td><strong> 0 - 70 : </strong>SK tidak diperpanjang</td>
+        </tr>
+        <tr>
+            <td><strong> 71 - 80 : </strong>SK diperpanjang namun evaluasi selama 3 bulan </td>
+        </tr>
+        <tr>
+            <td><strong> 81 - 100 : </strong>SK diperpanjang</td>
+        </tr>
+    </table>
+    <br>
     <strong>Keterangan :</strong>
     <table>
         @foreach ($kriteria as $key => $val)

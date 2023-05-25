@@ -26,22 +26,31 @@
                                         <label class="form-label" style="font-weight:600">Nama Lengkap</label>
                                         <input type="text" class="form-control @error('nama') is-invalid @enderror"
                                             name="nama" value="{{ old('nama') }}">
+                                        @error('nama')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class=" col-md-12 mb-3">
                                         <label class="form-label" style="font-weight:600">NIK</label>
                                         <input type="number" class="form-control @error('nik') is-invalid @enderror"
                                             name="nik" value="{{ old('nik') }}">
+                                        @error('nik')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label" style="font-weight:600">Jenis Pekerjaan</label>
                                         <input type="text"
                                             class="form-control @error('jenis_pekerjaan') is-invalid @enderror"
                                             name="jenis_pekerjaan" value="{{ old('jenis_pekerjaan') }}">
+                                        @error('jenis_pekerjaan')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-12">
                                         <label class="form-label" style="font-weight:600">Unit Kerja</label>
                                         <input type="text" class="form-control @error('unit_kerja') is-invalid @enderror"
-                                            name="unit_kerja" value="{{ old('unit_kerja') }}">
+                                            name="unit_kerja" value="DPPKB" readonly>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Tambah Laskar</button>

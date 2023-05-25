@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="float-end">
-                                <a href="{{ route('print') }}" class="btn btn-primary mt-2">
+                                <a href="{{ route('print') }}" target="_blank" class="btn btn-primary mt-2">
                                     <i class='fa fa-print fa-lg'></i> Rekap
                                 </a>
                             </div>
@@ -134,3 +134,11 @@
         </div>
     </div>
 @endsection
+
+@push('add-script')
+    <script>
+        function bukaTab(url) {
+            window.open(url, '_blank');
+        }
+    </script>
+@endpush

@@ -20,6 +20,16 @@ class PenilaianController extends Controller
         $kriteria = Kriteria::all();
         return view('admin.penilaian.index',compact('laskar','kriteria','laskar_nilai'));
     }
+
+    public function getNilai($id){
+        $nilai = Nilai::select('nilai')->where('laskar_pelangi_id',$id)->get();
+        $data = [];
+        foreach($nilai as $value){
+            $data[] = $value->nilai;
+        }
+        return response()->json($data);
+    }
+
     public function hasil(){
         $laskar = LaskarPelangi::orderBy('kode','asc')->get();
         $kriteria = Kriteria::all();
@@ -51,8 +61,6 @@ class PenilaianController extends Controller
                 ]);
             }
         }
-        // Alert::success('Berhasil', 'Berhasil Menambah Penilaian');
-        // return redirect()->route();
     }
 
     public function rekap(){

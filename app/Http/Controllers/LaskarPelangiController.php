@@ -27,9 +27,16 @@ class LaskarPelangiController extends Controller
         $request->validate([
             'kode' => 'unique:laskar_pelangis',
             'nama' => 'required',
-            'nik' => 'required:unique:laskar_pelangis',
+            'nik' => 'required|unique:laskar_pelangis|unique:users,email|max:16|min:16',
             'jenis_pekerjaan' => 'required',
             'unit_kerja' => 'required'
+        ], [
+            'nama.required' => 'nama harus diisi.',
+            'nik.required' => 'Nik harus diisi.',
+            'nik.unique' => 'Nik sudah terdaftar.',
+            'jenis_pekerjaan.required' => 'Jenis Pekerjaan harus diisi.',
+            'nik.max' => 'Nik harus 16 angka.',
+            'nik.min' => 'Nik harus 16 angka.'
         ]);
 
         $user = new User();
@@ -61,9 +68,16 @@ class LaskarPelangiController extends Controller
         $request->validate([
             'kode' => 'unique:laskar_pelangis,kode,'.$id,
             'nama' => 'required',
-            'nik' =>  'required,unique:laskar_pelangis,kode,'.$id,
+            'nik' => 'required|unique:users,email|max:16|min:16|unique:laskar_pelangis,kode,'.$id,
             'jenis_pekerjaan' => 'required',
             'unit_kerja' => 'required'
+        ], [
+            'nama.required' => 'nama harus diisi.',
+            'nik.required' => 'Nik harus diisi.',
+            'nik.unique' => 'Nik sudah terdaftar.',
+            'jenis_pekerjaan.required' => 'Jenis Pekerjaan harus diisi.',
+            'nik.max' => 'Nik harus 16 angka.',
+            'nik.min' => 'Nik harus 16 angka.'
         ]);
         $data = LaskarPelangi::findOrFail($id);
         $data->kode = $request->kode;

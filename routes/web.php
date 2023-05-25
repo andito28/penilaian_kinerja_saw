@@ -44,4 +44,5 @@ Route::group(['middleware' => ['auth','checkRole:admin,kepala_bidang,laskar']],f
     Route::get('/penilaian-rekap', [PenilaianController::class, 'rekap'])->name('penilaian.rekap');
     Route::get('/penilaian-hasil', [PenilaianController::class, 'hasil'])->name('penilaian.hasil');
     Route::get('/print', [PenilaianController::class, 'print'])->name('print');
+    Route::get('/get-nilai/{id}', [PenilaianController::class, 'getNilai'])->name('nilai');
 });
