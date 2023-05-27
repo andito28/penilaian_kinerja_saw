@@ -69,6 +69,7 @@ class LaskarPelangiController extends Controller
             'kode' => 'unique:laskar_pelangis,kode,'.$id,
             'nama' => 'required',
             'nik' => 'required|unique:users,email|max:16|min:16|unique:laskar_pelangis,kode,'.$id,
+            'nik' =>  'unique:laskar_pelangis,nik,'.$id,
             'jenis_pekerjaan' => 'required',
             'unit_kerja' => 'required'
         ], [
