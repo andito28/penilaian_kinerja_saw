@@ -62,8 +62,8 @@
                                                     {{ $value->nama_kriteria }}
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control data-input" name="nilai[]"
-                                                        placeholder="0 - 100" value="">
+                                                    <input type="number" class="form-control data-input myInput" name="nilai[]"
+                                                        placeholder="0 - 100" value="" min="0" max="100">
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <table border="2" class="table table-bordered">
+                             <table border="2" class="table table-bordered">
                                 <tr>
                                     <td><b>Kategori Penilaian</b></td>
                                     <td><b>Nilai Rata - rata</b></td>
@@ -89,6 +89,19 @@
                                 <tr>
                                     <td><b>Buruk</b></td>
                                     <td><b>0 - 70</b></b></td>
+                                </tr>
+                            </table>
+                             <table border="2" class="table table-bordered">
+                                <tr>
+                                    <td colspan="2"><b>Keterangan</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b class="text-success">Hijau</b></td>
+                                    <td><b class="text-success">Sudah Dinilai</b></b></td>
+                                </tr>
+                                <tr>
+                                    <td><b class="text-danger">Merah</b></td>
+                                    <td><b class="text-danger">Belum Dinilai</b></b></td>
                                 </tr>
                             </table>
                             <table class="table table-bordered" border="2">
@@ -123,6 +136,17 @@
 @endsection
 
 @push('add-script')
+   <script>
+      var inputElements = document.getElementsByClassName("myInput");
+      for (var i = 0; i < inputElements.length; i++) {
+        inputElements[i].addEventListener("input", function() {
+          if (parseInt(this.value) > 100) {
+            this.value = 100;
+          }
+        });
+      }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         // In your Javascript (external .js resource or <script> tag)
