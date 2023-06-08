@@ -93,6 +93,8 @@ class LaskarPelangiController extends Controller
 
     public function destroy(Request $request){
         $data = LaskarPelangi::findOrFail($request->id);
+        $user = User::where('id',$data->user_id)->first();
+        $user->delete();
         $data->delete();
         Alert::success('Berhasil', 'Berhasil Menghapus Data');
         return redirect()->route('laskar.index');
