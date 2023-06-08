@@ -16,6 +16,13 @@
             font-size: 14px;
             color: black;
         }
+
+        div.dataTables_wrapper div.dataTables_filter label {
+            font-weight: normal;
+            white-space: nowrap;
+            text-align: left;
+            margin-bottom: 10px;
+        }
     </style>
 @endpush
 
@@ -37,7 +44,7 @@
                 <div class="white_card_body">
                     <div class="QA_table mb_30 mt-2">
                         <div class="table-responsive">
-                            <table class="table lms_table_active" id="myTable">
+                            <table class="table" id="myTable">
                                 <thead style="background-color: #20c997; ">
                                     <tr>
                                         <th>No</th>
