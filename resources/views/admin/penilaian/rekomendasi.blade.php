@@ -110,6 +110,7 @@
                                         <th scope="col">Jenis Pekerjaan </th>
                                         <th scope="col">Unit Kerja </th>
                                         <th scope="col">Nilai Akhir</th>
+                                        <th scope="col">Nilai Rata-rata</th>
                                     </tr>
                                 </thead>
                                 <tbody style="text-align:center">
@@ -132,6 +133,7 @@
                                                 <td>{{ $value['nik'] }}</td>
                                                 <td>{{ $value['jenis_pekerjaan'] }}</td>
                                                 <td>{{ $value['unit_kerja'] }}</td>
+                                                <td>{{ number_format($value['nilai'], 5) }}</td>
                                                 <td>{{ number_format($average, 2) }}</td>
                                             </tr>
                                         @endif
@@ -230,6 +232,7 @@
                                         <th scope="col">Jenis Pekerjaan </th>
                                         <th scope="col">Unit Kerja </th>
                                         <th scope="col">Nilai Akhir</th>
+                                        <th scope="col">Nilai Rata-rata</th>
                                     </tr>
                                 </thead>
                                 <tbody style="text-align:center">
@@ -252,6 +255,7 @@
                                                 <td>{{ $value['nik'] }}</td>
                                                 <td>{{ $value['jenis_pekerjaan'] }}</td>
                                                 <td>{{ $value['unit_kerja'] }}</td>
+                                                <td>{{ number_format($value['nilai'], 5) }}</td>
                                                 <td>{{ number_format($average, 2) }}</td>
                                             </tr>
                                         @endif
