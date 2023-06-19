@@ -45,4 +45,7 @@ Route::group(['middleware' => ['auth','checkRole:admin,kepala_bidang,laskar']],f
     Route::get('/penilaian-hasil', [PenilaianController::class, 'hasil'])->name('penilaian.hasil');
     Route::get('/print', [PenilaianController::class, 'print'])->name('print');
     Route::get('/get-nilai/{id}', [PenilaianController::class, 'getNilai'])->name('nilai');
+    Route::get('/penilaian-rekomendasi', [PenilaianController::class, 'rekomendasi'])->name('penilaian.rekomendasi');
+    Route::get('/print-layak', [PenilaianController::class, 'printLayak'])->name('print.layak');
+    Route::get('/print-tlayak', [PenilaianController::class, 'printTlayak'])->name('print.tlayak');
 });

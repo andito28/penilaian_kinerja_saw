@@ -62,6 +62,14 @@
                     <span>Rekap Penilaian</span>
                 </a>
             </li>
+            <li class="">
+                <a href="{{ route('penilaian.rekomendasi') }}" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{{ asset('pages') }}/img/menu-icon/7.svg" alt="">
+                    </div>
+                    <span>Rekomendasi</span>
+                </a>
+            </li>
         @endif
     </ul>
 </nav>

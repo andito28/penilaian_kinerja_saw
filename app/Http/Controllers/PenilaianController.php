@@ -69,6 +69,27 @@ class PenilaianController extends Controller
         return view('admin.penilaian.rekap',compact('laskar','kriteria'));
     }
 
+    public function rekomendasi(){
+        $laskar = LaskarPelangi::orderBy('kode','asc')->get();
+        $kriteria = Kriteria::all();
+        return view('admin.penilaian.rekomendasi',compact('laskar','kriteria'));
+    }
+
+    public function printLayak(){
+        $laskar = LaskarPelangi::orderBy('kode','asc')->get();
+        $kriteria = Kriteria::all();
+        $pdf = PDF::loadview('admin.penilaian.print_layak',compact('laskar','kriteria'))->setPaper('a4','landscape');
+        return $pdf->stream();
+    }
+
+
+    public function printTlayak(){
+        $laskar = LaskarPelangi::orderBy('kode','asc')->get();
+        $kriteria = Kriteria::all();
+        $pdf = PDF::loadview('admin.penilaian.print_tlayak',compact('laskar','kriteria'))->setPaper('a4','landscape');
+        return $pdf->stream();
+    }
+
     public function print(){
         $laskar = LaskarPelangi::orderBy('kode','asc')->get();
         $kriteria = Kriteria::all();
