@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Alert;
+use Carbon\Carbon;
 use App\Models\Nilai;
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
@@ -22,7 +23,8 @@ class PenilaianController extends Controller
     }
 
     public function getNilai($id){
-        $nilai = Nilai::select('nilai')->where('laskar_pelangi_id',$id)->get();
+        $currentYear = Carbon::now()->year;
+        $nilai = Nilai::select('nilai')->where('laskar_pelangi_id',$id)->whereYear('created_at', $currentYear)->get();
         $data = [];
         foreach($nilai as $value){
             $data[] = $value->nilai;
@@ -37,6 +39,7 @@ class PenilaianController extends Controller
     }
 
     public function store(Request $request ){
+        $currentYear = Carbon::now()->year;
         $request->validate([
             'laskar_id' => 'required',
             'nilai.*' => 'required|max:100'
@@ -45,7 +48,7 @@ class PenilaianController extends Controller
         $laskar->penilaian = "true";
         $laskar->save();
         $count = count($request->nilai);
-        $data = Nilai::where('laskar_pelangi_id',$request->laskar_id)->first();
+        $data = Nilai::where('laskar_pelangi_id',$request->laskar_id)->whereYear('created_at',$currentYear)->first();
         if($data){
             for($i=0;  $i < $count; $i++){
                 Nilai::where(['laskar_pelangi_id' => $request->laskar_id])
@@ -75,25 +78,35 @@ class PenilaianController extends Controller
         return view('admin.penilaian.rekomendasi',compact('laskar','kriteria'));
     }
 
-    public function printLayak(){
-        $laskar = LaskarPelangi::orderBy('kode','asc')->get();
+    public function printLayak(Request $request){
+        // $laskar = LaskarPelangi::orderBy('kode','asc')->get();
+        $tahun = $request->tahun;
+        $laskar = LaskarPelangi::whereYear('created_at',$tahun)->orderBy('kode','asc')->get();
         $kriteria = Kriteria::all();
-        $pdf = PDF::loadview('admin.penilaian.print_layak',compact('laskar','kriteria'))->setPaper('a4','landscape');
+        $pdf = PDF::loadview('admin.penilaian.print_layak',compact('laskar','kriteria','tahun'))->setPaper('a4','landscape');
         return $pdf->stream();
     }
 
 
-    public function printTlayak(){
-        $laskar = LaskarPelangi::orderBy('kode','asc')->get();
+    public function printTlayak(Request $request){
+        // $laskar = LaskarPelangi::orderBy('kode','asc')->get();
+        $tahun = $request->tahun;
+        $laskar = LaskarPelangi::whereYear('created_at',$tahun)->orderBy('kode','asc')->get();
         $kriteria = Kriteria::all();
-        $pdf = PDF::loadview('admin.penilaian.print_tlayak',compact('laskar','kriteria'))->setPaper('a4','landscape');
+        $pdf = PDF::loadview('admin.penilaian.print_tlayak',compact('laskar','kriteria','tahun'))->setPaper('a4','landscape');
         return $pdf->stream();
     }
 
-    public function print(){
-        $laskar = LaskarPelangi::orderBy('kode','asc')->get();
+    public function print(Request $request){
+        $tahun = $request->tahun;
+        $laskar_id = $request->laskar_id;
+        if($laskar_id != 'all'){
+            $laskar = LaskarPelangi::where('id',$laskar_id)->whereYear('created_at',$tahun)->orderBy('kode','asc')->get();
+        }else{
+            $laskar = LaskarPelangi::whereYear('created_at',$tahun)->orderBy('kode','asc')->get();
+        }
         $kriteria = Kriteria::all();
-        $pdf = PDF::loadview('admin.penilaian.print',compact('laskar','kriteria'))->setPaper('a4','landscape');
+        $pdf = PDF::loadview('admin.penilaian.print',compact('laskar','kriteria','tahun'))->setPaper('a4','landscape');
         return $pdf->stream();
     }
 

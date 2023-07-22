@@ -29,16 +29,34 @@
             <div class="white_card mb_20">
                 <div class="white_card_body pb-0">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <h4 class="pt-2">Rekomendasi Keputusan Layak Diperpanjang
                             </h4>
                         </div>
-                        <div class="col-md-6">
-                            <div class="float-end">
-                                <a href="{{ route('print.layak') }}" target="_blank" class="btn btn-primary mt-2">
-                                    <i class='fa fa-print fa-lg'></i> Rekap
-                                </a>
-                            </div>
+                        <div class="col-md-4">
+                            <form action="{{ route('print.layak') }}" method="get" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <select class="form-control mt-2" id="tahun" name="tahun" required>
+                                            @php
+                                                $tahun = date('Y');
+                                            @endphp
+                                            <option value="">Tahun</option>
+                                            @for ($i = 2022; $i <= $tahun; $i++)
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{-- <a href="{{ route('print') }}" target="_blank" class="btn btn-primary mt-2">
+                                            <i class='fa fa-print fa-lg'></i> Rekap
+                                        </a> --}}
+                                        <button type="submit" class="btn btn-primary mt-2"> <i
+                                                class='fa fa-print fa-lg'></i>
+                                            Rekap </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="QA_table mb_30 mt-2">
@@ -156,11 +174,29 @@
                             </h4>
                         </div>
                         <div class="col-md-4">
-                            <div class="float-end">
-                                <a href="{{ route('print.tlayak') }}" target="_blank" class="btn btn-primary mt-2">
-                                    <i class='fa fa-print fa-lg'></i> Rekap
-                                </a>
-                            </div>
+                            <form action="{{ route('print.tlayak') }}" method="get" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <select class="form-control mt-2" id="tahun" name="tahun" required>
+                                            @php
+                                                $tahun = date('Y');
+                                            @endphp
+                                            <option value="">Tahun</option>
+                                            @for ($i = 2022; $i <= $tahun; $i++)
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{-- <a href="{{ route('print') }}" target="_blank" class="btn btn-primary mt-2">
+                                            <i class='fa fa-print fa-lg'></i> Rekap
+                                        </a> --}}
+                                        <button type="submit" class="btn btn-primary mt-2"> <i
+                                                class='fa fa-print fa-lg'></i>
+                                            Rekap </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="QA_table mb_30 mt-2">

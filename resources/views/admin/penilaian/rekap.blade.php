@@ -5,11 +5,24 @@
 @endsection
 
 @push('add-style')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
+        .select2-container .select2-selection--single {
+            margin-top: 8px;
+            padding-top: 5px;
+            height: 38px;
+        }
+
+        .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+            background-color: whitesmoke;
+            color: black;
+        }
+
         table th {
             color: white;
         }
     </style>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 @endpush
 
 @section('content')
@@ -33,11 +46,39 @@
                             <h4 class="pt-2">Rekap Hasil Penilaian</h4>
                         </div>
                         <div class="col-md-6">
-                            <div class="float-end">
-                                <a href="{{ route('print') }}" target="_blank" class="btn btn-primary mt-2">
-                                    <i class='fa fa-print fa-lg'></i> Rekap
-                                </a>
-                            </div>
+                            <form action="{{ route('print') }}" method="get" target="_blank">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <select name="laskar_id" class="js-example-basic-single mt-2" style="width:100%"
+                                            id="laskar_id" required>
+                                            <option value="all">tampilkan semuanya . . </option>
+                                            @foreach ($laskar as $value)
+                                                <option data-id="{{ $value->penilaian }}" value="{{ $value->id }}">
+                                                    {{ $value->nama }} <i class="fa fa-check-circle custom-icon"></i>
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-control mt-2" id="tahun" name="tahun" required>
+                                            @php
+                                                $tahun = date('Y');
+                                            @endphp
+                                            <option value="">Tahun</option>
+                                            @for ($i = 2022; $i <= $tahun; $i++)
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{-- <a href="{{ route('print') }}" target="_blank" class="btn btn-primary mt-2">
+                                            <i class='fa fa-print fa-lg'></i> Rekap
+                                        </a> --}}
+                                        <button type="submit" class="btn btn-primary mt-2"> <i
+                                                class='fa fa-print fa-lg'></i> Rekap </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="QA_table mb_30 mt-2">
@@ -136,6 +177,13 @@
 @endsection
 
 @push('add-script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
     <script>
         function bukaTab(url) {
             window.open(url, '_blank');

@@ -28,7 +28,7 @@
 <body>
     <div class="head">
         <h3>Penilaian Kinerja </h3>
-        <h3>Tahun {{ date('Y') }}</h3>
+        <h3>Tahun {{ $tahun }}</h3>
         <h3>Pengendalian Penduduk Dan Keluarga Berencana Kota Makassar</h3>
     </div>
     <table class="table table-bordered" id="myTable">
@@ -109,7 +109,7 @@
                 $no = 1;
                 rsort($hasil_ranks);
             @endphp
-            @foreach ($hasil_ranks as $value)
+            @forelse ($hasil_ranks as $value)
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $value['nama'] }}</td>
@@ -134,7 +134,13 @@
                     <td>{{ number_format($value['nilai'], 5) }}</td>
                     <td>{{ number_format($average, 2) }}</td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="21">
+                        <h3>Tidak ada data</h3>
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
     <br>
