@@ -42,7 +42,7 @@
                                             name="bobot" step="any" value="{{ old('bobot') }}">
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Tambah Kriteria</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>
                     </div>

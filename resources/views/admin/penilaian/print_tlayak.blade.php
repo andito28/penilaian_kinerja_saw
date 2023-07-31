@@ -28,7 +28,7 @@
 <body>
     <div class="head">
         <h3>Penilaian Kinerja </h3>
-        <h3>Tahun {{ $tahun }}</h3>
+        <h3>Periode 1 Januari - 31 Desember Tahun {{ $tahun }}</h3>
         <h3>Pengendalian Penduduk Dan Keluarga Berencana Kota Makassar</h3>
     </div>
     <table class="table table-bordered" id="myTable">

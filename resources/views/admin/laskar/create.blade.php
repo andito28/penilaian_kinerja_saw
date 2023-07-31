@@ -20,7 +20,7 @@
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label" style="font-weight:600">Kode</label>
                                         <input type="text" class="form-control @error('kode') is-invalid @enderror"
-                                            name="kode" value="{{ $kode }}" readonly>
+                                            name="kode" value="{{ $kode }}">
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label" style="font-weight:600">Nama Lengkap</label>
@@ -32,7 +32,7 @@
                                     </div>
                                     <div class=" col-md-12 mb-3">
                                         <label class="form-label" style="font-weight:600">NIK</label>
-                                        <input type="number" class="form-control @error('nik') is-invalid @enderror"
+                                        <input type="text" class="form-control @error('nik') is-invalid @enderror"
                                             name="nik" value="{{ old('nik') }}">
                                         @error('nik')
                                             <span class="text-danger">{{ $message }}</span>
@@ -53,7 +53,7 @@
                                             name="unit_kerja" value="DPPKB" readonly>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Tambah Laskar</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>
                     </div>
