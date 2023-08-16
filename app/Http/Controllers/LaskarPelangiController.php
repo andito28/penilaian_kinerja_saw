@@ -19,7 +19,8 @@ class LaskarPelangiController extends Controller
         $order = (int) substr($data, 3, 3);
         $order++;
         $name = "LSK";
-        $kode = $name . sprintf("%03s", $order);
+        // $kode = $name . sprintf("%03s", $order);
+        $kode = sprintf("%03s", $order);
         return view('admin.laskar.create',compact('kode'));
     }
 
@@ -33,6 +34,7 @@ class LaskarPelangiController extends Controller
         ], [
             'nama.required' => 'nama harus diisi.',
             'nik.required' => 'Nik harus diisi.',
+            'kode.unique' => 'Kode sudah terdaftar.',
             'nik.unique' => 'Nik sudah terdaftar.',
             'jenis_pekerjaan.required' => 'Jenis Pekerjaan harus diisi.',
             'nik.max' => 'Nik harus 16 angka.',
@@ -75,6 +77,7 @@ class LaskarPelangiController extends Controller
         ], [
             'nama.required' => 'nama harus diisi.',
             'nik.required' => 'Nik harus diisi.',
+            'kode.unique' => 'Kode sudah terdaftar.',
             'nik.unique' => 'Nik sudah terdaftar.',
             'jenis_pekerjaan.required' => 'Jenis Pekerjaan harus diisi.',
             'nik.max' => 'Nik harus 16 angka.',
