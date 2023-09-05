@@ -19,6 +19,7 @@ class CreateKriteriasTable extends Migration
             $table->string('nama_kriteria');
             $table->string('jenis');
             $table->double('bobot');
+            $table->enum('tipe',['regulasi','tambahan']);
             $table->timestamps();
         });
     }

@@ -11,10 +11,11 @@
                 <div class="white_card_body">
                     <div class="QA_section">
                         <div class="white_box_tittle list_header" style="margin-top: 20px">
-                            <h4>Tambah Kriteria</h4>
+                            <h4>Tambah Kriteria {{ $jenis_kriteria }}</h4>
                         </div>
                         <div class="QA_table mb_30">
-                            <form method="POST" action="{{ route('kriteria.store') }}">
+                            <form method="POST"
+                                action="{{ route('kriteria.store', ['jenis_kriteria' => $jenis_kriteria]) }}">
                                 @csrf
                                 <div class="row mb-3">
                                     <div class="col-md-12 mb-3">

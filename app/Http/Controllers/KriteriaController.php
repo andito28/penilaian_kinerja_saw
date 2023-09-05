@@ -9,12 +9,14 @@ use App\Models\Kriteria;
 class KriteriaController extends Controller
 {
     public function index(){
-        $data = Kriteria::all();
-        return view('admin.kriteria.index',compact('data'));
+        $kriteria_regulasi = Kriteria::where('tipe','regulasi')->get();
+        $kriteria_tambahan = Kriteria::where('tipe','tambahan')->get();
+        return view('admin.kriteria.index',compact('kriteria_regulasi','kriteria_tambahan'));
     }
 
-    public function create(){
-        return view('admin.kriteria.create');
+    public function create(Request $request){
+        $jenis_kriteria = $request->jenis;
+        return view('admin.kriteria.create',compact('jenis_kriteria'));
     }
 
     public function store(Request $request){
@@ -30,6 +32,7 @@ class KriteriaController extends Controller
         $data->nama_kriteria = $request->nama_kriteria;
         $data->jenis = $request->jenis;
         $data->bobot = $request->bobot;
+        $data->tipe = $request->jenis_kriteria;
         $data->save();
         Alert::success('Berhasil', 'Berhasil Menambah Data');
         return redirect()->route('kriteria.index');
