@@ -50,11 +50,27 @@ class PenilaianController extends Controller
         $count = count($request->nilai);
         $data = Nilai::where('laskar_pelangi_id',$request->laskar_id)->whereYear('created_at',$currentYear)->first();
         if($data){
-            for($i=0;  $i < $count; $i++){
-                Nilai::where(['laskar_pelangi_id' => $request->laskar_id])
-                ->where(['kriteria_id' => $request->kriteria[$i]])
-                ->update(['nilai' => $request->nilai[$i]]);
+            $count = count($request->kriteria);
+            for ($i = 0; $i < $count; $i++) {
+                $criteria = $request->kriteria[$i];
+                Nilai::updateOrInsert(
+                    [
+                        'laskar_pelangi_id' => $request->laskar_id,
+                        'kriteria_id' => $criteria,
+                    ],
+                    [
+                        'nilai' => $request->nilai[$i],
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]
+                );
             }
+
+            // for($i=0;  $i < $count; $i++){
+            //     Nilai::where(['laskar_pelangi_id' => $request->laskar_id])
+            //     ->where(['kriteria_id' => $request->kriteria[$i]])
+            //     ->update(['nilai' => $request->nilai[$i]]);
+            // }
         }else{
             for($i=0;  $i < $count; $i++){
                 Nilai::create([
